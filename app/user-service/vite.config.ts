@@ -11,6 +11,7 @@ export default defineConfig({
       filename: 'userService.js',
       exposes: {
         './UserServiceComponent': './src/App.tsx',
+        // './routes': './src/routes/routes.tsx',
       },
       shared: {
         react: {
@@ -27,6 +28,18 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
+  },
+  preview: {
+    port: 8081,              // 필요 포트
+    cors: true,              // Host에서 원격 모듈 로드 시 CORS 허용
+    headers: {
+      // 캐시 완전 비활성화
+      'Cache-Control': 'no-store, no-cache, must-revalidate, max-age=0',
+      'Pragma': 'no-cache',
+      'Expires': '0',
+      // 원격 로드 호환성
+      'Access-Control-Allow-Origin': '*',
+    },
   },
   server: {
     port: 8081,
