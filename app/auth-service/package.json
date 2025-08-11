@@ -2,19 +2,21 @@
   "name": "auth-service",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "build": "vite build",
+    "serve": "vite preview --port 8082",
+    "lint": "eslint ."
   },
   "dependencies": {
+    "@originjs/vite-plugin-federation": "^1.4.1",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "vite-plugin-federation": "^0.0.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",
+    "@types/node": "^24.2.1",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@vitejs/plugin-react": "^4.6.0",
