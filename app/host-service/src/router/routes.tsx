@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react';
 import type { RouteObject } from 'react-router-dom';
 import HomePage from '../pages/HomePage';
-import { ErrorBoundary } from '../pages/error/ErrorBoundary';
+import { RemoteBoundary, lazyWithRetry } from './remote-utils';
 
 const UserServiceComponent = lazy(() => import('userService/UserServiceComponent'));
 const AuthServiceComponent = lazy(() => import('authService/AuthServiceComponent'));
@@ -17,31 +17,31 @@ export const routes: RouteObject[] = [
   {
     path: '/users',
     element: (
-      <ErrorBoundary fallback={<div>Error loading user service</div>}>
+      <RemoteBoundary id="userService" fallback={<div>Error loading user service</div>}>
         <Suspense fallback={<div>Loading...</div>}>
           <UserServiceComponent />
         </Suspense>
-      </ErrorBoundary>
+      </RemoteBoundary>
     ),
   },
   {
     path: '/authorities',
     element: (
-      <ErrorBoundary fallback={<div>Error loading auth service</div>}>
+      <RemoteBoundary id="authService" fallback={<div>Error loading auth service</div>}>
         <Suspense fallback={<div>Loading...</div>}>
           <AuthServiceComponent />
         </Suspense>
-      </ErrorBoundary>
+      </RemoteBoundary>
     ),
   },
   {
     path: '/notis',
     element: (
-      <ErrorBoundary fallback={<div>Error loading notification service</div>}>
+      <RemoteBoundary id="notiService" fallback={<div>Error loading notification service</div>}>
         <Suspense fallback={<div>Loading...</div>}>
           <NotiServiceComponent />
         </Suspense>
-      </ErrorBoundary>
+      </RemoteBoundary>
     ),
   },
   { path: '*', element: <div>404</div> },
