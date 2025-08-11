@@ -10,6 +10,8 @@ export default defineConfig({
       name: 'host_service',
       remotes: {
         userService: 'http://localhost:8081/assets/userService.js',
+        authService: 'http://localhost:8082/assets/authService.js',
+        notiService: 'http://localhost:8083/assets/notiService.js',
       },
       shared: {
         react: {
