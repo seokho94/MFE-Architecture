@@ -1,10 +1,12 @@
-import React from "react";
-import { Link as RouterLink, Outlet, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link as RouterLink, Outlet, useLocation } from "react-router-dom";
 import { menus } from "./sidebarMenu";
+import type { MenuItem } from "./sidebarMenu";
 import {
 		AppBar,
 		Box,
 		CssBaseline,
+		Collapse,
 		Divider,
 		Drawer,
 		List,
@@ -14,8 +16,70 @@ import {
 		Toolbar,
 		Typography,
 } from '@mui/material';
+import { ExpandLess, ExpandMore } from '@mui/icons-material';
 
 const drawerWidth = 240;
+
+const MenuItemComponent = ({ menu, level = 0 }: { menu: MenuItem; level?: number }) => {
+	const location = useLocation();
+	const hasChildren = menu.children && menu.children.length > 0;
+	const isActive = location.pathname === `/${menu.key}`;
+	const isParentActive = hasChildren && menu.children?.some((child: MenuItem) => location.pathname === `/${child.key}`);
+	
+	const [open, setOpen] = useState(hasChildren);
+
+	const handleClick = () => {
+		if (hasChildren) {
+			setOpen(!open);
+		}
+	};
+
+	return (
+		<>
+			<ListItem disablePadding>
+				<ListItemButton
+					component={hasChildren ? 'div' : RouterLink}
+					to={hasChildren ? undefined : `/${menu.key}`}
+					onClick={handleClick}
+					sx={{
+						pl: level * 3 + 2,
+						pr: 2,
+						py: level === 0 ? 1.5 : 1,
+						backgroundColor: isActive || isParentActive ? 'rgba(25, 118, 210, 0.08)' : 'transparent',
+						borderLeft: level > 0 ? `3px solid ${isActive ? '#1976d2' : 'rgba(0, 0, 0, 0.12)'}` : 'none',
+						'&:hover': {
+							backgroundColor: 'rgba(25, 118, 210, 0.04)',
+						},
+					}}
+				>
+					<ListItemText 
+						primary={menu.value}
+						sx={{
+							'& .MuiListItemText-primary': {
+								fontWeight: isActive || isParentActive ? 'bold' : 'normal',
+								color: isActive || isParentActive ? '#1976d2' : 'inherit',
+								fontSize: level === 0 ? '1rem' : '0.9rem',
+							},
+						}}
+					/>
+					{hasChildren && (open ? <ExpandLess /> : <ExpandMore />)}
+				</ListItemButton>
+			</ListItem>
+			{hasChildren && (
+				<Collapse in={open} timeout="auto" unmountOnExit>
+					<List component="div" disablePadding sx={{ 
+						borderLeft: level === 0 ? '1px solid rgba(0, 0, 0, 0.08)' : 'none',
+						ml: level === 0 ? 2 : 0,
+					}}>
+						{menu.children?.map((child: MenuItem) => (
+							<MenuItemComponent key={child.key} menu={child} level={level + 1} />
+						))}
+					</List>
+				</Collapse>
+			)}
+		</>
+	);
+};
 
 const BaseLayout = () => {
 	return (
@@ -47,11 +111,7 @@ const BaseLayout = () => {
 				<Divider />
 				<List>
 					{menus.map((menu) => (
-						<ListItem key={menu.value} disablePadding>
-							<ListItemButton key={menu.key} component={RouterLink} to={`/${menu.key}`}>
-								<ListItemText primary={menu.value} />
-							</ListItemButton>
-						</ListItem>
+						<MenuItemComponent key={menu.key} menu={menu} />
 					))}
 				</List>
 			</Drawer>

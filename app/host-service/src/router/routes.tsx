@@ -1,9 +1,10 @@
 import { lazy, Suspense } from 'react';
 import type { RouteObject } from 'react-router-dom';
 import HomePage from '../pages/HomePage';
-import { RemoteBoundary, lazyWithRetry } from './remote-utils';
+import { RemoteBoundary } from './remote-utils';
 
-const UserServiceComponent = lazy(() => import('userService/UserServiceComponent'));
+const UserServicePage = lazy(() => import('userService/UserServicePage'));
+const UserTestPage = lazy(() => import('userService/UserTestPage'));
 const AuthServiceComponent = lazy(() => import('authService/AuthServiceComponent'));
 const NotiServiceComponent = lazy(() => import('notiService/NotiServiceComponent'));
 
@@ -19,7 +20,17 @@ export const routes: RouteObject[] = [
     element: (
       <RemoteBoundary id="userService" fallback={<div>Error loading user service</div>}>
         <Suspense fallback={<div>Loading...</div>}>
-          <UserServiceComponent />
+          <UserServicePage />
+        </Suspense>
+      </RemoteBoundary>
+    ),
+  },
+  {
+    path: '/users/test',
+    element: (
+      <RemoteBoundary id="userService" fallback={<div>Error loading user service</div>}>
+        <Suspense fallback={<div>Loading...</div>}>
+          <UserTestPage />
         </Suspense>
       </RemoteBoundary>
     ),

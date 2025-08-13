@@ -1,4 +1,10 @@
-export const menus: {key: string; value: string }[] = [
+export interface MenuItem {
+  key: string;
+  value: string;
+  children?: MenuItem[];
+}
+
+export const menus: MenuItem[] = [
 	{
 		key: '',
 		value: '홈',
@@ -6,6 +12,16 @@ export const menus: {key: string; value: string }[] = [
 	{
 		key: 'users',
 		value: '사용자관리',
+		children: [
+			{
+				key: 'users',
+				value: '사용자 목록',
+			},
+			{
+				key: 'users/test',
+				value: '사용자 테스트',
+			},
+		],
 	},
 	{
 		key: 'authorities',

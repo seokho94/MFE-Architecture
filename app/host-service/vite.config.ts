@@ -8,6 +8,9 @@ export default defineConfig({
     react(),
     federation({
       name: 'host_service',
+      exposes: {
+        './Store': './src/store/Store.ts',
+      },
       remotes: {
         userService: 'http://localhost:8081/assets/userService.js',
         authService: 'http://localhost:8082/assets/authService.js',
@@ -20,6 +23,9 @@ export default defineConfig({
         'react-dom': {
           requiredVersion: '^19.1.0',
         },
+        zustand: {
+          requiredVersion: '^5.0.7',
+        }
       },
     }),
   ],

@@ -1,4 +1,4 @@
-import React, { StrictMode, Suspense } from 'react'
+import { StrictMode } from 'react'
 import App from './App.tsx'
 import { createRoot } from 'react-dom/client'
 import './index.css'
