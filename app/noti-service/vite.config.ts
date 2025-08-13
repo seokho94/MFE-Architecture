@@ -13,13 +13,19 @@ export default defineConfig({
         './NotiServiceComponent': './src/App.tsx',
         // './routes': './src/routes/routes.tsx',
       },
+      remotes: {
+        hostService: 'http://localhost:8080/assets/remoteEntry.js',
+      },
       shared: {
         react: {
-          requiredVersion: '^19.1.0', // package.json에 맞게 수정
+          requiredVersion: '^19.1.0',
         },
         'react-dom': {
           requiredVersion: '^19.1.0',
         },
+        zustand: {
+          requiredVersion: '^5.0.7',
+        }
       },
     }),
   ],
