@@ -11,7 +11,8 @@ export default defineConfig({
       filename: 'userService.js',
       exposes: {
         './UserServiceComponent': './src/App.tsx',
-        // './routes': './src/routes/routes.tsx',
+        './UserServicePage': './src/components/UserServicePage.tsx',
+        './UserTestPage': './src/components/UserTestPage.tsx',
       },
       shared: {
         react: {
