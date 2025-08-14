@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import federation from '@originjs/vite-plugin-federation';
+import { federation } from '@module-federation/vite';
 import path from 'path';
 
 export default defineConfig({
@@ -15,12 +15,9 @@ export default defineConfig({
         './UserTestPage': './src/components/UserTestPage.tsx',
       },
       shared: {
-        react: {
-          requiredVersion: '^19.1.0', // package.json에 맞게 수정
-        },
-        'react-dom': {
-          requiredVersion: '^19.1.0',
-        },
+        react:        { singleton: true, strictVersion: true, requiredVersion: '19.1.1' },
+        'react-dom':  { singleton: true, strictVersion: true, requiredVersion: '19.1.1' },
+        zustand:      { singleton: true, strictVersion: true },
       },
     }),
   ],
