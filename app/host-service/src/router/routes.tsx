@@ -3,10 +3,10 @@ import type { RouteObject } from 'react-router-dom';
 import HomePage from '../pages/HomePage';
 import { RemoteBoundary } from './remote-utils';
 
-const UserServicePage = lazy(() => import('userService/UserServicePage'));
-const UserTestPage = lazy(() => import('userService/UserTestPage'));
-const AuthServiceComponent = lazy(() => import('authService/AuthServiceComponent'));
-const NotiServiceComponent = lazy(() => import('notiService/NotiServiceComponent'));
+const UserServicePage = lazy(() => import('user_service/UserServicePage'));
+const UserTestPage = lazy(() => import('user_service/UserTestPage'));
+const AuthServiceComponent = lazy(() => import('auth_service/AuthServiceComponent'));
+const NotiServiceComponent = lazy(() => import('noti_service/NotiServiceComponent'));
 
 export const routes: RouteObject[] = [
   {
