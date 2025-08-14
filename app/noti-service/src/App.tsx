@@ -1,41 +1,10 @@
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
+import { useIncrementStore } from 'host_service/Store'
 import './App.css'
-import { useState, useEffect } from 'react'
 
 function App() {
-  const [count, setCount] = useState(0)
-  const [remoteCount, setRemoteCount] = useState(0)
-
-  useEffect(() => {
-    // 주기적으로 remote store의 상태를 확인
-    const interval = setInterval(async () => {
-      try {
-        const module = await import('hostService/Store')
-        const store = module.useIncrementStore()
-        setRemoteCount(store.count)
-      } catch (error) {
-        console.error('Failed to load remote store:', error)
-      }
-    }, 1000)
-
-    return () => clearInterval(interval)
-  }, [])
-
-  const handleIncrement = async () => {
-    try {
-      const module = await import('hostService/Store')
-      const store = module.useIncrementStore()
-      store.increment()
-      setRemoteCount(store.count)
-    } catch (error) {
-      console.error('Failed to increment remote store:', error)
-      // 로컬 상태로 fallback
-      setCount(prev => prev + 1)
-    }
-  }
-
-  const currentCount = remoteCount || count
+  const { getCount, increment } = useIncrementStore();
 
   return (
     <>
@@ -49,8 +18,8 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={handleIncrement}>
-          Noti Service count is {currentCount}
+        <button onClick={increment}>
+          Noti Service count is {getCount()}
         </button>
         <p>
           <code>src/App.tsx</code> 파일을 수정하고 저장하여 HMR을 테스트하세요.

@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import federation from '@originjs/vite-plugin-federation';
+import { federation } from '@module-federation/vite';
 import path from 'path';
 
 export default defineConfig({
@@ -14,18 +14,16 @@ export default defineConfig({
         // './routes': './src/routes/routes.tsx',
       },
       remotes: {
-        hostService: 'http://localhost:8080/assets/remoteEntry.js',
+        host_service: {
+          type: 'module',                // <-- 중요
+          name: 'host_service',          // Remote의 name 과 100% 일치
+          entry: 'http://localhost:8080/hostService.js',
+        },
       },
       shared: {
-        react: {
-          requiredVersion: '^19.1.0',
-        },
-        'react-dom': {
-          requiredVersion: '^19.1.0',
-        },
-        zustand: {
-          requiredVersion: '^5.0.7',
-        }
+        react:        { singleton: true, strictVersion: true, requiredVersion: '19.1.1' },
+        'react-dom':  { singleton: true, strictVersion: true, requiredVersion: '19.1.1' },
+        zustand:      { singleton: true, strictVersion: true },
       },
     }),
   ],
