@@ -14,7 +14,7 @@ export const menus: MenuItem[] = [
 		value: '사용자관리',
 		children: [
 			{
-				key: 'users',
+				key: 'users/service',
 				value: '사용자 목록',
 			},
 			{

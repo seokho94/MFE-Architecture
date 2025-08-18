@@ -16,7 +16,7 @@ export const routes: RouteObject[] = [
       </Suspense>
   ) },
   {
-    path: '/users',
+    path: '/users/service',
     element: (
       <RemoteBoundary id="userService" fallback={<div>Error loading user service</div>}>
         <Suspense fallback={<div>Loading...</div>}>
