@@ -35,6 +35,7 @@ export default defineConfig({
   },
   server: {
     port: 8083,
+    origin: 'http://localhost:8083',
     open: true,
   },
   build: {
@@ -43,5 +44,5 @@ export default defineConfig({
     // assetsDir: '', // 필요 시 설정
     // rollupOptions: {}, // 고급 빌드 설정 시 사용
   },
-  // base: '/', // publicPath 관련, 필요 시 설정
+  base: 'http://localhost:8083',
 });

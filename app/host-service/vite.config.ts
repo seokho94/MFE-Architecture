@@ -53,4 +53,5 @@ export default defineConfig({
     outDir: 'dist',
     target: 'esnext',
   },
+  base: 'http://localhost:8080',
 });

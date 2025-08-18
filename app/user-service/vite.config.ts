@@ -14,6 +14,13 @@ export default defineConfig({
         './UserServicePage': './src/components/UserServicePage.tsx',
         './UserTestPage': './src/components/UserTestPage.tsx',
       },
+      remotes: {
+        host_service: {
+          type: 'module',                // <-- 중요
+          name: 'host_service',          // Remote의 name 과 100% 일치
+          entry: 'http://localhost:8080/hostService.js',
+        },
+      },
       shared: {
         react:        { singleton: true, strictVersion: true, requiredVersion: '19.1.1' },
         'react-dom':  { singleton: true, strictVersion: true, requiredVersion: '19.1.1' },
@@ -41,6 +48,7 @@ export default defineConfig({
   },
   server: {
     port: 8081,
+    origin: 'http://localhost:8081',
     open: true,
   },
   build: {
@@ -49,5 +57,5 @@ export default defineConfig({
     // assetsDir: '', // 필요 시 설정
     // rollupOptions: {}, // 고급 빌드 설정 시 사용
   },
-  // base: '/', // publicPath 관련, 필요 시 설정
+  base: 'http://localhost:8081',
 });
