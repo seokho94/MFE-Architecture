@@ -10,6 +10,10 @@ export const menus: MenuItem[] = [
 		value: '홈',
 	},
 	{
+		key: 'common-components',
+		value: '공통 컴포넌트',
+	},
+	{
 		key: 'users',
 		value: '사용자관리',
 		children: [

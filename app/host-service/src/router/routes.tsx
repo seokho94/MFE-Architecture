@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react';
 import type { RouteObject } from 'react-router-dom';
 import HomePage from '../pages/HomePage';
+import CommonComponentsDemo from '../pages/CommonComponentsDemo';
 import { RemoteBoundary } from './remote-utils';
 
 const UserServicePage = lazy(() => import('user_service/UserServicePage'));
@@ -15,6 +16,14 @@ export const routes: RouteObject[] = [
         <HomePage />
       </Suspense>
   ) },
+  {
+    path: '/common-components',
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <CommonComponentsDemo />
+      </Suspense>
+    ),
+  },
   {
     path: '/users/service',
     element: (

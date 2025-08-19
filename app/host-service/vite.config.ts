@@ -11,6 +11,9 @@ export default defineConfig({
       filename: 'hostService.js',
       exposes: {
         './Store': './src/store/Store.ts',
+        './CommonComponents': './src/components/common/index.ts',
+        './ArboristTree': './src/components/common/ArboristTree.tsx',
+        './DataGrid': './src/components/common/DataGrid.tsx',
       },
       remotes: {
         // user_service: 'http://localhost:8081/userService.js',

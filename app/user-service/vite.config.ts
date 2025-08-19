@@ -13,6 +13,7 @@ export default defineConfig({
         './UserServiceComponent': './src/App.tsx',
         './UserServicePage': './src/components/UserServicePage.tsx',
         './UserTestPage': './src/components/UserTestPage.tsx',
+        './UserServiceWithCommonComponents': './src/components/UserServiceWithCommonComponents.tsx',
       },
       remotes: {
         host_service: {
